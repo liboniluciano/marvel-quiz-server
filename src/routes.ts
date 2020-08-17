@@ -1,11 +1,10 @@
 import express from 'express';
 
+import ScoreController from './controllers/ScoreController';
 
 const routes = express.Router();
+const scoreController = new ScoreController();
 
-routes.get('/ping', (req, res) => {
-  console.log(process.env.DB_DATABASE);
-  return res.json({ message: 'hehe' });
-})
+routes.post('/score', scoreController.create);
 
 export default routes;
