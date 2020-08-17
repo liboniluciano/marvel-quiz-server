@@ -1,1 +1,1 @@
-web: npm start && knex migrate:rollback && knex migrate:latest
+web: yarn install && knex migrate:rollback && knex migrate:latest
