@@ -1,1 +1,0 @@
-web: yarn install && knex migrate:rollback && knex migrate:latest
