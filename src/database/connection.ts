@@ -9,7 +9,7 @@ const db = knex({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE
   },
-  useNullAsDefault: true
+  useNullAsDefault: true,
 })
 
 export default db;
