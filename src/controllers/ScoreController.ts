@@ -3,6 +3,22 @@ import { Request, Response } from "express";
 import db from "../database/connection";
 
 export default class ScoreController {
+  async index(req: Request, res: Response) {
+    const trx = await db.transaction();
+
+    try {
+      const ranking = await db('users').orderBy('score', 'desc').limit(10);
+
+      await trx.commit();
+      return res.json(ranking);
+
+    } catch(err){
+      return res.status(400).json({
+        error: "Erro inesperado ao buscar a pontuação",
+      });
+    }
+  }
+
   async create(req: Request, res: Response) {
     const { email, name, score } = req.body;
     const trx = await db.transaction();
@@ -10,11 +26,16 @@ export default class ScoreController {
     const exists = await db("users").where("email", email);
 
     try {
-      const { id } = exists[0];
-
+      /** Verificando se o e-mail já existe */
       if (exists.length > 0) {
-        /** Verificando se o e-mail já existe */
-        await db("users").update({ score }).where("id", id);
+        const { id } = exists[0];
+        const scoreBefore = exists[0].score;
+
+        if(score > scoreBefore) {
+          await db("users").update({ score }).where("id", id);
+        } else {
+          return res.json({ message: `Você possui uma pontuação maior ou igual que ${score}, portanto ela não foi atualizada`});
+        }
 
       } else {
         await trx("users").insert({
@@ -29,6 +50,7 @@ export default class ScoreController {
 
     } catch (err) {
       await trx.rollback();
+      // console.log(err);
       return res.status(400).json({
         error: "Erro inesperado ao salvar a pontuação",
       });
