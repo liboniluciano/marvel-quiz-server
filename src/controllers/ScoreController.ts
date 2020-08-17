@@ -54,7 +54,6 @@ export default class ScoreController {
 
     } catch (err) {
       await trx.rollback();
-      // console.log(err);
       return res.status(400).json({
         error: "Erro inesperado ao salvar a pontuação",
       });
