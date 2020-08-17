@@ -3,11 +3,11 @@ import knex from 'knex';
 const db = knex({
   client: 'postgres',
   connection: {
-    host: '127.0.0.1',
+    host: process.env.DB_HOST_PROD,
     port: 5434,
-    user: 'postgres',
-    password: 'docker',
-    database: 'marvelquiz'
+    user: process.env.DB_HOST_PROD,
+    password: process.env.DB_HOST_PROD,
+    database: process.env.DB_HOST_PROD
   },
   useNullAsDefault: true
 })

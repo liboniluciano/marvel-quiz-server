@@ -6,6 +6,10 @@ export default class ScoreController {
   async index(req: Request, res: Response) {
     const trx = await db.transaction();
 
+    var teste = process.env.NODE_ENV;
+
+    console.log(teste);
+
     try {
       const ranking = await db('users').orderBy('score', 'desc').limit(10);
 
