@@ -1,1 +1,1 @@
-web: yarn knex migrate:latest --env production && knex && tsc ts-node src/server.ts
+web: migrate:latest --env production && node dist/src/server.js
