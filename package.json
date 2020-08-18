@@ -13,7 +13,7 @@
     "build-ts": "tsc",
     "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "start": "npm run serve",
-    "serve": "node dist/src/server.js",
+    "serve": "node src/server.js",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
     "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
   },
