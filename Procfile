@@ -1,1 +1,1 @@
-web: node src/server.js knex migrate:latest --env production
+web:ts-node/src/server.ts
