@@ -1,1 +1,1 @@
-web: node dist/server.js knex migrate:latest --env production
+web: node dist/src/server.js knex migrate:latest --env production
